@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: synth-log-test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: synth-log-test
+  template:
+    metadata:
+      labels:
+        app: synth-log-test
+    spec:
+      containers:
+      - name: synth-log-test
+        image: your-docker-image:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENV
+          value: "dev"
+        - name: TAG
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: TARGET_URL
+          value: "http://localhost:8080"
+        - name: EVENT_FREQUENCY
+          value: "60"
+        - name: FILE_NAME
+          value: "logconfig.log"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: synth-log-test
+spec:
+  selector:
+    app: synth-log-test
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
