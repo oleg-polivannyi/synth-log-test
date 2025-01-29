@@ -1,11 +1,14 @@
 # Start from the official Golang base image
-FROM golang:1.18-alpine
+FROM golang:1.23-alpine
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Copy go mod and sum files
-COPY go.mod go.sum ./
+# Copy go mod file
+COPY go.mod ./
+
+# go.sum is not available since there are no dependencies
+# COPY go.sum ./
 
 # Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod download
