@@ -10,6 +10,7 @@ type Config struct {
 	Env            string
 	Tag            string
 	TargetURL      string
+	Port           string
 	EventFrequency int
 	FileName       string
 	StdOut         bool
@@ -45,6 +46,7 @@ func LoadConfig() Config {
 		Env:            getEnv("ENV", "dev"),
 		Tag:            getEnv("TAG", "default-tag"),
 		TargetURL:      getEnv("TARGET_URL", "http://localhost:8080"),
+		Port:           getEnv("PORT", "8080"),
 		EventFrequency: getEnvInt("EVENT_FREQUENCY", 60),
 		FileName:       getEnv("FILE_NAME", ""),
 		StdOut:         getEnvBool("STD_OUT", true),
