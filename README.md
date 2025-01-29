@@ -3,7 +3,7 @@
 ## synth-log-test
 The purpose is to perform a synthetic test of the logging system in Kubernetes. 
 Since there may be involved multiple components, the test involves at least two pods. 
-Each pod generates an event every second (or with other frequescy set through the environment), sends a POST request to the other pod, and logs the event as outgoing and еhe other pod logs the event as incoming.
+Each pod generates an event every second (or with other frequescy set through the environment), sends a POST request to the other pod, and logs the event as outgoing and the other pod logs the event as incoming.
 
 The test is successful if the logs are consistent and the events are received in the correct order. 
 
