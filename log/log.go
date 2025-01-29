@@ -44,8 +44,8 @@ func NewLogger(config *config.Config) (*Logger, error) {
 }
 
 func (l *Logger) Info(v ...interface{}) {
-	l.fileLogger.Println(v...)
-	l.stdLogger.Println(v...)
+	l.fileLogger.Println(AugmentedLogger(v...))
+	l.stdLogger.Println(AugmentedLogger(v...))
 }
 
 func (l *Logger) Error(v ...interface{}) {
