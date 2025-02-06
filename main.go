@@ -40,8 +40,10 @@ func handleRequest(logger *log.Logger, cfg config.Config) http.HandlerFunc {
 }
 
 func sendRequestsPeriodically(logger *log.Logger, cfg config.Config) {
+	ticker := time.NewTicker(time.Duration(60/cfg.EventFrequency) * time.Second)
+	defer ticker.Stop()
 	for {
-		time.Sleep(time.Duration(60/cfg.EventFrequency) * time.Second)
+		<-ticker.C
 		message := generateGUID()
 		form := fmt.Sprintf("message=%s", message)
 		resp, err := http.Post(cfg.TargetURL, "application/x-www-form-urlencoded", bytes.NewBufferString(form))
