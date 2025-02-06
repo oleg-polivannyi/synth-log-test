@@ -34,7 +34,7 @@ func main() {
 func handleRequest(logger *log.Logger, cfg config.Config) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
-		logger.Info("Received request from", r.RemoteAddr, "message:", r.Form.Get("message"))
+		logger.Info("Received request from ", r.RemoteAddr, " message: ", r.Form.Get("message"))
 		fmt.Fprintf(w, "Hello from %s!", cfg.Tag)
 	}
 }
@@ -50,7 +50,7 @@ func sendRequestsPeriodically(logger *log.Logger, cfg config.Config) {
 		if err != nil {
 			logger.Error("Failed to send request:", err)
 		} else {
-			logger.Info("Sent request to", cfg.TargetURL, "with response status:", resp.Status)
+			logger.Info("Sent request to ", cfg.TargetURL, " with response status: ", resp.Status)
 			resp.Body.Close()
 		}
 	}
